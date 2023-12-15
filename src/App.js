@@ -18,41 +18,7 @@ let text1='hello world'
 let text2='hello pakistan'
 
 
-  // const text='welcome to html'
-  // const meme='moye moye'
-  // const num=5
-  // const isExist=true
-  // const car={
-  //   name:'civic',
-  //   model:2021,
-  //   color:'red'
-
-  // }
-  // const memes = ['Moye Moye', 'Aayeen',
-  // 'Program War Gya', 'Kehna kia chahtay ho?',
-  // 'Jaldi bol! Subha kahi jana hai!', 'Kesa diya?']
-
-  // const cars = ['Audi', 'Mehran', 'Civic', 'Corolla']
-  // const carlist=[
-  //   {
-  //     name:'audi',
-  //     model:2016,
-  //     color:'blue',
-  //     features:['power','ingine','mike']
-  //   },
-  //   {
-  //     name:'mehran',
-  //     model:2011,
-  //     color:'gray',
-  //     features:['power','battery','ac']
-  //   },
-  //   {
-  //     name:'civic',
-  //     model:2019,
-  //     color:'red',
-  //     features:['power','ingine','petrol']
-  //   }
-  // ]
+  
   
   
   return (
