@@ -38,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <input placeholder='enter a text' value={text} onChange={(e) => setText(e.target.value)} />
+        <input placeholder='enter a text' value={text} onChange={(e) => setText(e.target.value)} width='90px' />
         <button onClick={addItem}>Add Todos</button>
         <ul>
           {list.map(function (item, index) {
