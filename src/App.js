@@ -2,40 +2,59 @@
 import './App.css';
 import { useState } from 'react'
 
+// ... (previous code)
+
 function App() {
-// let [text,setText]=useState('ubaid')
-// function reverstText(){
-// let reversedText=text.split('').reverse().join('')
-// setText(reversedText)
-// }
+  const [list, setList] = useState([]);
+  const [text, setText] = useState('');
+  const [editIndex, setEditIndex] = useState(null);
 
-let [show,setShow1]=useState(true)
-let bulboff='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO9yLzruDXvlHE_-2pW7Iir9XMykEWSgnVRg&usqp=CAU'
-let bulbon='https://static.vecteezy.com/system/resources/previews/009/385/277/non_2x/colored-light-bulb-clipart-design-illustration-free-png.png'
+  function addItem() {
+    if (!text) return; // Don't add empty items
+    const copyList = [...list];
+    if (editIndex !== null) {
+      // If editIndex is not null, update the existing item
+      copyList[editIndex] = text;
+      setEditIndex(null); // Reset editIndex after updating
+    } else {
+      // If editIndex is null, add a new item
+      copyList.push(text);
+    }
+    setList(copyList);
+    setText(''); // Clear the input after adding/updating an item
+  }
 
-let [showText,setShow2]=useState(true)
-let text1='hello world'
-let text2='hello pakistan'
+  function deleteItem(index) {
+    const copyList = [...list];
+    copyList.splice(index, 1);
+    setList(copyList);
+  }
 
+  function editItem(index) {
+    setEditIndex(index);
+    setText(list[index]); // Set the input value to the item being edited
+  }
 
-  
-  
-  
   return (
-
     <div className="App">
       <header className="App-header">
-        <h3>{showText? text1:text2}</h3>
-        <button onClick={()=>setShow2(!showText)}>change</button>
-
-<br></br>
-        <img width='190px' src={show? bulbon:bulboff}/>
-        <button onClick={()=> setShow1(!show)}> on/off </button>
-
-    
+        <input placeholder='enter a text' value={text} onChange={(e) => setText(e.target.value)} />
+        <button onClick={addItem}>Add Todos</button>
+        <ul>
+          {list.map(function (item, index) {
+            return (
+              <li key={index}>
+                {item}
+                <button onClick={() => deleteItem(index)}>Delete</button>
+                <button onClick={() => editItem(index)}>Edit</button>
+              </li>
+            );
+          })}
+        </ul>
       </header>
     </div>
   );
 }
 
 export default App;
+
