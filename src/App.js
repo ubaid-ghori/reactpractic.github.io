@@ -1,52 +1,83 @@
 // import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react'
-
-// ... (previous code)
+import { useState } from 'react';
 
 function App() {
-  const [list, setList] = useState([]);
-  const [text, setText] = useState('');
-  const [editIndex, setEditIndex] = useState(null);
+  const [list, setlist] = useState([]);
+  const [text, setText] = useState();
+  const [editmode, seteditmode] = useState(false);
+  const [currentindex, setcurrentindex] = useState();
 
   function addItem() {
-    if (!text) return; // Don't add empty items
-    const copyList = [...list];
-    if (editIndex !== null) {
-      // If editIndex is not null, update the existing item
-      copyList[editIndex] = text;
-      setEditIndex(null); // Reset editIndex after updating
-    } else {
-      // If editIndex is null, add a new item
-      copyList.push(text);
-    }
-    setList(copyList);
-    setText(''); // Clear the input after adding/updating an item
+    const copylist = [...list];
+    copylist.push(text);
+    setlist(copylist);
+    setText('');
+  }
+
+  function updateText(e) {
+    const value = e.target.value;
+    setText(value);
   }
 
   function deleteItem(index) {
-    const copyList = [...list];
-    copyList.splice(index, 1);
-    setList(copyList);
+    const copylist = [...list];
+    copylist.splice(index, 1);
+    setlist(copylist);
   }
 
   function editItem(index) {
-    setEditIndex(index);
-    setText(list[index]); // Set the input value to the item being edited
+    const value = list[index];
+    setText(value);
+    seteditmode(true);
+    setcurrentindex(index);
+  }
+
+  function updateItem() {
+    seteditmode(false);
+    const copylist = [...list];
+    copylist[currentindex] = text;
+    setlist(copylist);
+    setText('');
+  }
+
+  function deleteAll() {
+    setlist([]);
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{ textAlign: 'center', padding: '20px' }}>
       <header className="App-header">
-        <input placeholder='enter a text' value={text} onChange={(e) => setText(e.target.value)} width='90px' />
-        <button onClick={addItem}>Add Todos</button>
-        <ul>
+        <input
+          placeholder="Enter a text"
+          onChange={updateText}
+          value={text}
+          style={{ margin: '10px', padding: '5px' }}
+        />
+        {editmode ? (
+          <button onClick={updateItem} style={{ margin: '5px' }}>
+            Update Item
+          </button>
+        ) : (
+          <button onClick={addItem} style={{ margin: '5px' }}>
+            Add Todos
+          </button>
+        )}
+
+        <button onClick={deleteAll} style={{ margin: '5px' }}>
+          Delete All
+        </button>
+        <ul style={{ listStyleType: 'none', padding: 0 }}>
           {list.map(function (item, index) {
             return (
-              <li key={index}>
+              <li key={index} style={{ margin: '5px', padding: '5px', border: '1px solid #ddd' }}>
                 {item}
-                <button onClick={() => deleteItem(index)}>Delete</button>
-                <button onClick={() => editItem(index)}>Edit</button>
+                <button onClick={() => deleteItem(index)} style={{ marginLeft: '5px' }}>
+                  Delete
+                </button>
+                <button onClick={() => editItem(index)} style={{ marginLeft: '5px' }}>
+                  Edit
+                </button>
               </li>
             );
           })}
@@ -57,4 +88,3 @@ function App() {
 }
 
 export default App;
-
