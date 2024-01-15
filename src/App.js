@@ -55,16 +55,16 @@ function App() {
           style={{ margin: '10px', padding: '5px' }}
         />
         {editmode ? (
-          <button onClick={updateItem} style={{ margin: '5px' }}>
+          <button onClick={updateItem} style={{ margin: '6px' }}>
             Update Item
           </button>
         ) : (
-          <button onClick={addItem} style={{ margin: '5px' }}>
+          <button onClick={addItem} style={{ margin: '6px' }}>
             Add Todos
           </button>
         )}
 
-        <button onClick={deleteAll} style={{ margin: '5px' }}>
+        <button onClick={deleteAll} style={{ margin: '6px' }}>
           Delete All
         </button>
         <ul style={{ listStyleType: 'none', padding: 0 }}>
